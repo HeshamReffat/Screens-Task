@@ -1,5 +1,6 @@
 import 'package:calculator_app/Screens/HomeScreen.dart';
 import 'package:calculator_app/Screens/Loginpage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatelessWidget {
@@ -30,7 +31,6 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Widget dialog({Widget title, Widget content}) {
       return AlertDialog(
         title: title,
@@ -53,7 +53,7 @@ class SignUp extends StatelessWidget {
             content: Text('Please Enter Your Name'),
           ),
         );
-      }else if(_email.isEmpty){
+      } else if (_email.isEmpty) {
         showDialog(
           context: context,
           builder: (context) => dialog(
@@ -61,7 +61,7 @@ class SignUp extends StatelessWidget {
             content: Text('Please enter your Email'),
           ),
         );
-      }else if(_password.isEmpty){
+      } else if (_password.isEmpty) {
         showDialog(
           context: context,
           builder: (context) => dialog(
@@ -69,7 +69,7 @@ class SignUp extends StatelessWidget {
             content: Text('Please enter your Password'),
           ),
         );
-      }else{
+      } else {
         Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
       }
     }
@@ -91,7 +91,7 @@ class SignUp extends StatelessWidget {
                   child: Column(
                     children: [
                       buildTextField('Name', 'Enter your name', _nameController,
-                          _nameFocusNode, TextInputAction.next, false),
+                          _nameFocusNode, TextInputAction.next, false,TextInputType.name),
                       SizedBox(
                         height: 10,
                       ),
@@ -101,7 +101,8 @@ class SignUp extends StatelessWidget {
                           _emailController,
                           _emailFocusNode,
                           TextInputAction.next,
-                          false),
+                          false,
+                          TextInputType.emailAddress),
                       SizedBox(
                         height: 10,
                       ),
@@ -111,7 +112,8 @@ class SignUp extends StatelessWidget {
                           _passwordController,
                           _passwordFocusNode,
                           TextInputAction.done,
-                          true),
+                          true,
+                          TextInputType.number),
                     ],
                   ),
                 ),
@@ -159,12 +161,14 @@ class SignUp extends StatelessWidget {
   }
 
   TextField buildTextField(
-      String label,
-      String hint,
-      TextEditingController controller,
-      FocusNode focus,
-      TextInputAction action,
-      bool obscure) {
+    String label,
+    String hint,
+    TextEditingController controller,
+    FocusNode focus,
+    TextInputAction action,
+    bool obscure,
+    TextInputType type,
+  ) {
     return TextField(
       decoration: InputDecoration(
         labelText: label,
@@ -174,6 +178,7 @@ class SignUp extends StatelessWidget {
       focusNode: focus,
       obscureText: obscure,
       textInputAction: action,
+      keyboardType: type,
     );
   }
 }

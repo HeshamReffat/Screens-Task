@@ -22,10 +22,8 @@ class LoginPage extends StatelessWidget {
 
   String get _password => _passwordController.text;
 
-
   @override
   Widget build(BuildContext context) {
-
     Widget dialog({Widget title, Widget content}) {
       return AlertDialog(
         title: title,
@@ -38,8 +36,9 @@ class LoginPage extends StatelessWidget {
         ],
       );
     }
+
     void checkData() {
-      if(_email.isEmpty){
+      if (_email.isEmpty) {
         showDialog(
           context: context,
           builder: (context) => dialog(
@@ -47,7 +46,7 @@ class LoginPage extends StatelessWidget {
             content: Text('Please enter your Email'),
           ),
         );
-      }else if(_password.isEmpty){
+      } else if (_password.isEmpty) {
         showDialog(
           context: context,
           builder: (context) => dialog(
@@ -55,10 +54,11 @@ class LoginPage extends StatelessWidget {
             content: Text('Please enter your Password'),
           ),
         );
-      }else{
+      } else {
         Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
       }
     }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
@@ -80,7 +80,8 @@ class LoginPage extends StatelessWidget {
                         false,
                         _emailController,
                         _emailFocusNode,
-                        TextInputAction.next),
+                        TextInputAction.next,
+                        TextInputType.emailAddress),
                     SizedBox(
                       height: 10,
                     ),
@@ -90,7 +91,8 @@ class LoginPage extends StatelessWidget {
                         true,
                         _passwordController,
                         _passwordFocusNode,
-                        TextInputAction.done),
+                        TextInputAction.done,
+                        TextInputType.number),
                   ],
                 ),
               ),
@@ -104,7 +106,7 @@ class LoginPage extends StatelessWidget {
                 height: 40,
                 child: RaisedButton(
                   elevation: 4,
-                  onPressed: () =>checkData(),
+                  onPressed: () => checkData(),
                   child: Text(
                     'Login',
                     style: TextStyle(fontSize: 18, color: Colors.white),
@@ -143,6 +145,7 @@ class LoginPage extends StatelessWidget {
     TextEditingController controller,
     FocusNode focus,
     TextInputAction action,
+    TextInputType type,
   ) {
     return TextField(
       controller: controller,
@@ -153,6 +156,7 @@ class LoginPage extends StatelessWidget {
       obscureText: obscure,
       textInputAction: action,
       focusNode: focus,
+      keyboardType: type,
     );
   }
 }

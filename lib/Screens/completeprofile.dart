@@ -107,51 +107,55 @@ class Profile extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      buildTextField(
-                          'Name',
-                          'Hisham Reffat',
-                          _nameController,
-                          _nameFocusNode,
-                          TextInputAction.next,
-                          false),
+                      buildTextField('Name', 'Hisham Reffat', _nameController,
+                          _nameFocusNode, TextInputAction.next, false,TextInputType.name,),
                       SizedBox(
                         height: 10,
                       ),
                       buildTextField(
-                          'Address lane',
-                          '12 st. california ',
-                          _addressController,
-                          _addressFocusNode,
-                          TextInputAction.next,
-                          false),
+                        'Address lane',
+                        '12 st. california ',
+                        _addressController,
+                        _addressFocusNode,
+                        TextInputAction.next,
+                        false,
+                        TextInputType.streetAddress,
+                      ),
                       buildTextField(
                           'City',
                           'California ',
                           _cityController,
                           _cityFocusNode,
                           TextInputAction.next,
-                          false),
+                          false,
+                          TextInputType.name),
                       buildTextField(
-                          'State',
-                          'UnitedState',
-                          _stateController,
-                          _stateFocusNode,
-                          TextInputAction.next,
-                          false),
+                        'State',
+                        'UnitedState',
+                        _stateController,
+                        _stateFocusNode,
+                        TextInputAction.next,
+                        false,
+                        TextInputType.name,
+                      ),
                       buildTextField(
-                          'PostalCode',
-                          '11511',
-                          _codeController,
-                          _codeFocusNode,
-                          TextInputAction.next,
-                          false),
+                        'PostalCode',
+                        '11511',
+                        _codeController,
+                        _codeFocusNode,
+                        TextInputAction.next,
+                        false,
+                        TextInputType.number,
+                      ),
                       buildTextField(
-                          'Phone Number',
-                          '+20 01234567898',
-                          _phoneController,
-                          _phoneFocusNode,
-                          TextInputAction.done,
-                          false),
+                        'Phone Number',
+                        '+20 01234567898',
+                        _phoneController,
+                        _phoneFocusNode,
+                        TextInputAction.done,
+                        false,
+                        TextInputType.number,
+                      ),
                     ],
                   ),
                 ),
@@ -161,10 +165,7 @@ class Profile extends StatelessWidget {
               ),
               Center(
                 child: SizedBox(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width / 1.2,
+                  width: MediaQuery.of(context).size.width / 1.2,
                   height: 50,
                   child: RaisedButton(
                     elevation: 4,
@@ -187,12 +188,14 @@ class Profile extends StatelessWidget {
     );
   }
 
-  TextField buildTextField(String label,
+  TextField buildTextField(
+      String label,
       String hint,
       TextEditingController controller,
       FocusNode focus,
       TextInputAction action,
-      bool obscure) {
+      bool obscure,
+      TextInputType type) {
     return TextField(
       decoration: InputDecoration(
         labelText: label,
@@ -202,6 +205,7 @@ class Profile extends StatelessWidget {
       focusNode: focus,
       obscureText: obscure,
       textInputAction: action,
+      keyboardType: type,
     );
   }
 }
