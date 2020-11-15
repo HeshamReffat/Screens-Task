@@ -107,8 +107,15 @@ class Profile extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      buildTextField('Name', 'Hisham Reffat', _nameController,
-                          _nameFocusNode, TextInputAction.next, false,TextInputType.name,),
+                      buildTextField(
+                        'Name',
+                        'Hisham Reffat',
+                        _nameController,
+                        _nameFocusNode,
+                        TextInputAction.next,
+                        false,
+                        TextInputType.name,
+                      ),
                       SizedBox(
                         height: 10,
                       ),
@@ -188,15 +195,17 @@ class Profile extends StatelessWidget {
     );
   }
 
-  TextField buildTextField(
-      String label,
-      String hint,
-      TextEditingController controller,
-      FocusNode focus,
-      TextInputAction action,
-      bool obscure,
-      TextInputType type) {
-    return TextField(
+  TextFormField buildTextField(
+    String label,
+    String hint,
+    TextEditingController controller,
+    FocusNode focus,
+    TextInputAction action,
+    bool obscure,
+    TextInputType type, {
+    FormFieldValidator check,
+  }) {
+    return TextFormField(
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -206,6 +215,7 @@ class Profile extends StatelessWidget {
       obscureText: obscure,
       textInputAction: action,
       keyboardType: type,
+      validator: check,
     );
   }
 }

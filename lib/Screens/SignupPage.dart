@@ -1,5 +1,6 @@
 import 'package:calculator_app/Screens/HomeScreen.dart';
 import 'package:calculator_app/Screens/Loginpage.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -90,8 +91,15 @@ class SignUp extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      buildTextField('Name', 'Enter your name', _nameController,
-                          _nameFocusNode, TextInputAction.next, false,TextInputType.name),
+                      buildTextField(
+                          'Name',
+                          'Enter your name',
+                          _nameController,
+                          _nameFocusNode,
+                          TextInputAction.next,
+                          false,
+                          TextInputType.name,
+                      check: (value) => EmailValidator.validate(value) ? null : "Please enter a valid email",),
                       SizedBox(
                         height: 10,
                       ),
@@ -160,16 +168,17 @@ class SignUp extends StatelessWidget {
     );
   }
 
-  TextField buildTextField(
+  TextFormField buildTextField(
     String label,
     String hint,
     TextEditingController controller,
     FocusNode focus,
     TextInputAction action,
     bool obscure,
-    TextInputType type,
-  ) {
-    return TextField(
+    TextInputType type, {
+    FormFieldValidator check,
+  }) {
+    return TextFormField(
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -179,6 +188,7 @@ class SignUp extends StatelessWidget {
       obscureText: obscure,
       textInputAction: action,
       keyboardType: type,
+      validator: check,
     );
   }
 }

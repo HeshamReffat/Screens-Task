@@ -11,6 +11,7 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
+  var value = 300.0;
   List<bool> _values = [true, false, true, false, true, false];
   @override
   Widget build(BuildContext context) {
@@ -29,14 +30,17 @@ class _FilterScreenState extends State<FilterScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Budget'),
-                  LinearPercentIndicator(
-                    width: 170.0,
-                    lineHeight: 14.0,
-                    percent: 0.5,
-                    backgroundColor: Colors.grey,
-                    progressColor: Colors.blue,
+                  Slider(
+                    value: value.toDouble(),
+                    min: 300.0,
+                    max: 1000.0,
+                    onChanged: (val){
+                      setState(() {
+                        value = val.roundToDouble();
+                      });
+                    },
                   ),
-                  Text('450\$'),
+                  Text('$value\$'),
                 ],
               ),
               Divider(),
